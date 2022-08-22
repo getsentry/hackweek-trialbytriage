@@ -74,15 +74,47 @@
     // ------------------------------------------------------------------------
     // Opposition Game Logic
 
+    const mapSentryDataToEnemy = (enemy, troop, issue) => {
+        const shortId = issue.shortId;
+        const title = issue.title;
+        const level = issue.level;
+        const platform = issue.platform;
+
+        // set enemy name
+        enemy.name = shortId ? shortId : title.split(": ")[0];
+        // set troop dialogue
+        troop.pages[0].list.unshift([
+            {
+                "code": 101, // text title
+                "indent": 0,
+                parameters: [
+                    "Monster",
+                    4,
+                    0,
+                    2,
+                    level
+                ]
+            },
+            {
+                "code": 401,
+                "indent": 0,
+                parameters: [
+                    title, // text dialogue
+                ]
+            }
+        ]);
+        return [enemy, troop];
+    }
+
+
     const generateOpposition = (templateData, sentryData) => {
 
         for (let i = 0; i < Math.min(templateData.enemies.length, sentryData.length); i++) {
-            templateData.enemies[i].name = sentryData[i].shortId;
+            // templateData.enemies[i].name = sentryData[i].shortId;
+            let mappedData = mapSentryDataToEnemy(templateData.enemies[i], templateData.troops[i], sentryData[i]);
+            templateData.enemies[i] = mappedData[0];
+            templateData.troops[i] = mappedData[1];
         }
-
-        // ***************************************
-        // * TODO: Put cool stuff in here!!! :-D *
-        // ***************************************
 
         // The returned object forms an interface with the "apply" command
         return {

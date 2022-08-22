@@ -114,7 +114,7 @@ function launchBrowser(url: string) {
     child_process.exec(command + ' ' + url);
 }
 
-const port = 5000;
+const port = 5001;
 const server: http.Server = http.createServer(serve);
 server.listen(port);
 // launchBrowser("http://localhost:" + port);
