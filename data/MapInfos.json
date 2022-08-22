@@ -1,8 +1,8 @@
 [
 null,
-{"id":1,"expanded":true,"name":"Colosseum","order":1,"parentId":0,"scrollX":675.2727272727273,"scrollY":375.8181818181818},
-{"id":2,"expanded":false,"name":"Swamp","order":2,"parentId":0,"scrollX":832.3636363636364,"scrollY":375.8181818181818},
-{"id":3,"expanded":false,"name":"Floating Temple","order":4,"parentId":0,"scrollX":716.7272727272727,"scrollY":625.6363636363636},
-null,
-{"id":5,"expanded":false,"name":"Volcano","order":3,"parentId":0,"scrollX":1024.3636363636365,"scrollY":465.2727272727273}
+{"id":1,"expanded":true,"name":"Colosseum","order":1,"parentId":0,"scrollX":811,"scrollY":450.5},
+{"id":2,"expanded":false,"name":"Swamp","order":2,"parentId":0,"scrollX":853,"scrollY":1322.5},
+{"id":3,"expanded":false,"name":"Floating Temple","order":4,"parentId":0,"scrollX":811,"scrollY":789.5},
+{"id":4,"expanded":false,"name":"Cursed Cave","order":5,"parentId":0,"scrollX":1637,"scrollY":590.5},
+{"id":5,"expanded":false,"name":"Volcano","order":3,"parentId":0,"scrollX":1044,"scrollY":1949.5}
 ]
