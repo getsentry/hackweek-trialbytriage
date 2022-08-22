@@ -1,4 +1,8 @@
 [
 null,
-{"id":1,"expanded":true,"name":"Colosseum","order":1,"parentId":0,"scrollX":0,"scrollY":0}
+{"id":1,"expanded":true,"name":"Colosseum","order":1,"parentId":0,"scrollX":811,"scrollY":450.5},
+{"id":2,"expanded":false,"name":"Swamp","order":2,"parentId":0,"scrollX":853,"scrollY":1322.5},
+{"id":3,"expanded":false,"name":"Floating Temple","order":4,"parentId":0,"scrollX":811,"scrollY":789.5},
+{"id":4,"expanded":false,"name":"Cursed Cave","order":5,"parentId":0,"scrollX":1637,"scrollY":590.5},
+{"id":5,"expanded":false,"name":"Volcano","order":3,"parentId":0,"scrollX":1044,"scrollY":1949.5}
 ]
