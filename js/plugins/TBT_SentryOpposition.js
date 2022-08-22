@@ -77,7 +77,7 @@
     const generateOpposition = (templateData, sentryData) => {
 
         for (let i = 0; i < Math.min(templateData.enemies.length, sentryData.length); i++) {
-            templateData.enemies[i].name = sentryData[i].shortId;
+            templateData.enemies[i].name = sentryData[i].title.split(': ')[0];
         }
 
         // ***************************************
