@@ -203,13 +203,22 @@ TBT.SentryIntegration = TBT.SentryIntegration || {};
                     },
                 }),
             }
-        )).then((response) => {
-            // TODO: Handle error statuses
+        )).catch((error) => {
+            console.log("Oops: " + error);
+            TBT.Utils.setVariable(TBT.Utils.VARS.sen.downloadStatus, 2);
+            throw error;
+        }).then((response) => {
+            if (response.status !== 200) {
+                const downloadStatus = (response.status === 401) ? 4
+                    : (response.status === 404) ? 5 : 3;
+                TBT.Utils.setVariable(TBT.Utils.VARS.sen.downloadStatus, downloadStatus);
+                throw response.status;
+            }
             return response.text();
         }).then((text) => {
             TBT.Utils.setVariable(TBT.Utils.VARS.sen.downloadStatus, 1);
             TBT.Utils.setVariable(TBT.Utils.VARS.sen.downloadedData, text);
-        });
+        }).catch((error) => { });
     });
 
     TBT.SentryIntegration.isReadyToConnect = () => {
