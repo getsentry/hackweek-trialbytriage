@@ -90,6 +90,7 @@ TBT.SentryIntegration = TBT.SentryIntegration || {};
             symbol: "org_slug",
             label: "Organization Slug",
             var: TBT.Utils.VARS.sen.orgSlug,
+            default: "sentry",
         },
         {
             symbol: "email",
