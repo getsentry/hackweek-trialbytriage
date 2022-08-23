@@ -78,21 +78,21 @@
         const shortId = issue.shortId;
         const title = issue.title;
         const level = issue.level;
-        const platform = issue.platform;
+        const platform = issue.platform; // TODO: use for speech bubble
 
         // set enemy name
         enemy.name = shortId ? shortId : title.split(": ")[0];
         // set troop dialogue
-        troop.pages[0].list.unshift([
+        troop.pages[0].list.unshift(
             {
-                "code": 101, // text title
+                "code": 101,
                 "indent": 0,
                 parameters: [
-                    "Monster",
-                    4,
+                    "", // headshot
+                    0,
                     0,
                     2,
-                    level
+                    level // text title
                 ]
             },
             {
@@ -102,7 +102,7 @@
                     title, // text dialogue
                 ]
             }
-        ]);
+        );
         return [enemy, troop];
     }
 
