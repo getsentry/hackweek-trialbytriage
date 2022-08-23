@@ -101,7 +101,7 @@
         // Shuffle each tier
         let shuffleIndex = 0;
         for (const tierSize of COLOSSEUM_TIERS) {
-            shuffleArraySegments([templateData.enemies, templateData.troops],
+            shuffleArraySegments([templateData.troops],
                 shuffleIndex, shuffleIndex + tierSize);
             shuffleIndex += tierSize;
         }
