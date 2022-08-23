@@ -81,7 +81,7 @@
         const platform = issue.platform; // TODO: use for speech bubble
         let errorCount = 0;
         const issueStats = issue.stats["24h"];
-        for (var i = 0; i < issueStats.length; ++i) {
+        for (let i = 0; i < issueStats.length; ++i) {
             errorCount += issueStats[i][1];
         }
 
