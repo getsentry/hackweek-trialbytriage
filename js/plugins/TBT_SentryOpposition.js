@@ -42,6 +42,26 @@
 
     const pluginName = "TBT_SentryOpposition";
 
+    /**
+     * Shuffle a segment in parallel arrays identically.
+     *
+     * @param {Object[Object[]]} arrays an array of the arrays to shuffle
+     * @param {number} lowerBound the segment's lower bound, inclusive
+     * @param {number} upperBound the segment's upper bound, exclusive
+     */
+    const shuffleArraySegments = (arrays, lowerBound, upperBound) => {
+        let size;
+        while ((size = upperBound - lowerBound) > 0) {
+            const index = Math.floor(Math.random() * size) + lowerBound;
+            for (const array of arrays) {
+                const swap = array[index];
+                array[index] = array[lowerBound];
+                array[lowerBound] = swap;
+            }
+            lowerBound++;
+        }
+    };
+
     // ------------------------------------------------------------------------
     // Template Data I/O
 
@@ -56,7 +76,6 @@
             enemies: $dataEnemies,
             troops: $dataTroops,
         };
-        console.log("raw: " + JSON.stringify(templateData));
 
         Object.keys(templateData).forEach((key) => {
             templateData[key] = templateData[key]
@@ -74,9 +93,20 @@
     // ------------------------------------------------------------------------
     // Opposition Game Logic
 
-    const generateOpposition = (templateData, sentryData) => {
+    const COLOSSEUM_TIERS = [6, 6, 6, 6, 6];
 
-        for (let i = 0; i < Math.min(templateData.enemies.length, sentryData.length); i++) {
+    const generateOpposition = (templateData, sentryData) => {
+        shuffleArraySegments([sentryData], 0, sentryData.length);
+
+        // Shuffle each tier
+        let shuffleIndex = 0;
+        for (const tierSize of COLOSSEUM_TIERS) {
+            shuffleArraySegments([templateData.enemies, templateData.troops],
+                shuffleIndex, shuffleIndex + tierSize);
+            shuffleIndex += tierSize;
+        }
+
+        for (let i = 0; i < Math.min(shuffleIndex, sentryData.length); i++) {
             templateData.enemies[i].name = sentryData[i].shortId;
         }
 
@@ -96,12 +126,9 @@
 
     PluginManager.registerCommand(pluginName, "generate", () => {
         const sentryData = TBT.Utils.getVariable(TBT.Utils.VARS.sen.downloadedData);
-        if (sentryData) {
-            const opposition = generateOpposition(loadTemplateData(), JSON.parse(sentryData));
-            if (opposition) {
-                TBT.Utils.setVariable(TBT.Utils.VARS.opp.generatedData, JSON.stringify(opposition));
-            }
-        }
+        const sentryDataObj = sentryData ? JSON.parse(sentryData) : [];
+        const opposition = generateOpposition(loadTemplateData(), JSON.parse(sentryData));
+        TBT.Utils.setVariable(TBT.Utils.VARS.opp.generatedData, JSON.stringify(opposition));
     });
 
     PluginManager.registerCommand(pluginName, "apply", () => {
