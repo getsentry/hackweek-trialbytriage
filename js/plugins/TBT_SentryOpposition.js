@@ -79,6 +79,11 @@
         const title = issue.title;
         const level = issue.level;
         const platform = issue.platform; // TODO: use for speech bubble
+        let errorCount = 0;
+        const issueStats = issue.stats["24h"];
+        for (var i = 0; i < issueStats.length; ++i) {
+            errorCount += issueStats[i][1];
+        }
 
         // set enemy name
         enemy.name = shortId ? shortId : title.split(": ")[0];

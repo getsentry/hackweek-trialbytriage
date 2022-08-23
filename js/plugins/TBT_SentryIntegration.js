@@ -188,7 +188,7 @@ TBT.SentryIntegration = TBT.SentryIntegration || {};
         // TODO: Let the player customize the parameters on this query?
         const address = server + "api/0/organizations/" + orgSlug
             + "/issues/"
-            + "?collapse=stats&expand=owners&expand=inbox&limit=2"
+            + "?expand=owners&expand=inbox&limit=2"
             + "&query=is%3Aunresolved&shortIdLookup=1&statsPeriod=1h";
 
         fetch(new Request(
