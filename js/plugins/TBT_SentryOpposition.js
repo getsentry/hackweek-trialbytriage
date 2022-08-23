@@ -111,9 +111,9 @@
 
         for (let i = 0; i < Math.min(templateData.enemies.length, sentryData.length); i++) {
             // templateData.enemies[i].name = sentryData[i].shortId;
-            let mappedData = mapSentryDataToEnemy(templateData.enemies[i], templateData.troops[i], sentryData[i]);
-            templateData.enemies[i] = mappedData[0];
-            templateData.troops[i] = mappedData[1];
+            const [mappedEnemy, mappedTroop] = mapSentryDataToEnemy(templateData.enemies[i], templateData.troops[i], sentryData[i]);
+            templateData.enemies[i] = mappedEnemy;
+            templateData.troops[i] = mappedTroop;
         }
 
         // The returned object forms an interface with the "apply" command

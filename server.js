@@ -143,7 +143,7 @@ function launchBrowser(url) {
     var command = process.platform == 'darwin' ? 'open' : process.platform == 'win32' ? 'start' : 'xdg-open';
     child_process.exec(command + ' ' + url);
 }
-var port = 5001;
+var port = 5000;
 var server = http.createServer(serve);
 server.listen(port);
 // launchBrowser("http://localhost:" + port);
