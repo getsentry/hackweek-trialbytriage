@@ -138,8 +138,10 @@
         const COLOSSEUM_TIERS = [6, 6, 6, 6, 6];
         let shuffleIndex = 0;
         for (const tierSize of COLOSSEUM_TIERS) {
-            shuffleArraySegments([templateData.troops],
-                shuffleIndex, shuffleIndex + tierSize);
+            if (false) /* TODO: Debug interaction with mapSentryDataToEnemy */ {
+                shuffleArraySegments([templateData.troops],
+                    shuffleIndex, shuffleIndex + tierSize);
+            }
             shuffleIndex += tierSize;
         }
         const totalColosseumTemplates = shuffleIndex;
