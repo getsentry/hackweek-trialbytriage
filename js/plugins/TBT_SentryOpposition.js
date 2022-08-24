@@ -129,6 +129,8 @@
             enemy.traits.push(generateTypeModifier(FRONTEND_TYPE, 0.5));
         }
         // set troop dialogue
+        troop.pages[0].conditions.turnValid = true;
+        troop.pages[0].conditions.turnA = 0;
         troop.pages[0].list.unshift(
             {
                 "code": 101,
