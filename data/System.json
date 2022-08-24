@@ -70,7 +70,9 @@
     "Earth",
     "Wind",
     "Light",
-    "Darkness"
+    "Darkness",
+    "Frontend",
+    "Backend"
   ],
   "equipTypes": ["", "Weapon", "Shield", "Head", "Body", "Accessory"],
   "gameTitle": "Trial by Triage",
