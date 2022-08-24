@@ -35,6 +35,10 @@
  * @command apply
  * @text Apply Opposition
  * @desc Apply custom opposition data to the game database
+ * 
+ * @command setNextTroop
+ * @text Set Next Troop
+ * @desc Set the ID of the next troop to fight in the Colosseum
  */
 
 (() => {
@@ -154,34 +158,48 @@
         return [enemy, troop];
     }
 
+    const COLOSSEUM_TIERS = [
+        [1, 2, 3, 4, 5, 6],
+        [7, 8, 9, 10, 11, 12],
+        [13, 14, 15, 16, 17, 18],
+        [19, 20, 21, 22, 23, 24],
+        [25, 26, 27, 28, 29, 30],
+    ];
+
+    const setColosseumSchedule = () => {
+        let schedule = [];
+        for (let tier of COLOSSEUM_TIERS) {
+            tier = [...tier];
+            shuffleArraySegments([tier], 0, tier.length);
+            schedule = schedule.concat(tier);
+        }
+
+        TBT.Utils.setVariable(TBT.Utils.VARS.col.troopSchedule, JSON.stringify(schedule));
+        TBT.Utils.setVariable(TBT.Utils.VARS.col.maxWins, schedule.length);
+        TBT.Utils.setVariable(TBT.Utils.VARS.col.nextTroop, schedule[0]);
+        return schedule;
+    };
 
     const generateOpposition = (templateData, sentryData) => {
+        const enemies = [...templateData.enemies];
+        const troops = [...templateData.troops];
+
         shuffleArraySegments([sentryData], 0, sentryData.length);
+        const colosseumSchedule = setColosseumSchedule();
 
-        // Shuffle each tier
-        const COLOSSEUM_TIERS = [6, 6, 6, 6, 6];
-        let shuffleIndex = 0;
-        for (const tierSize of COLOSSEUM_TIERS) {
-            if (false) /* TODO: Debug interaction with mapSentryDataToEnemy */ {
-                shuffleArraySegments([templateData.troops],
-                    shuffleIndex, shuffleIndex + tierSize);
-            }
-            shuffleIndex += tierSize;
-        }
-        const totalColosseumTemplates = shuffleIndex;
+        for (let i = 0; i < Math.min(colosseumSchedule.length, sentryData.length); i++) {
+            const troopIndex = colosseumSchedule[i] - 1;
+            const troop = troops[troopIndex];
+            const enemyIndex = troop.members[0].enemyId - 1;
+            const enemy = enemies[enemyIndex];
 
-        for (let i = 0; i < Math.min(shuffleIndex, sentryData.length); i++) {
-            // templateData.enemies[i].name = sentryData[i].shortId;
-            const [mappedEnemy, mappedTroop] = mapSentryDataToEnemy(templateData.enemies[i], templateData.troops[i], sentryData[i]);
-            templateData.enemies[i] = mappedEnemy;
-            templateData.troops[i] = mappedTroop;
+            const [mappedEnemy, mappedTroop] = mapSentryDataToEnemy(enemy, troop, sentryData[i]);
+            enemies[enemyIndex] = mappedEnemy;
+            troops[troopIndex] = mappedTroop;
         }
 
         // The returned object forms an interface with the "apply" command
-        return {
-            enemies: templateData.enemies,
-            troops: templateData.troops,
-        }
+        return { enemies, troops }
     };
 
     // ------------------------------------------------------------------------
@@ -190,7 +208,7 @@
     PluginManager.registerCommand(pluginName, "generate", () => {
         const sentryData = TBT.Utils.getVariable(TBT.Utils.VARS.sen.downloadedData);
         const sentryDataObj = sentryData ? JSON.parse(sentryData) : [];
-        const opposition = generateOpposition(loadTemplateData(), JSON.parse(sentryData));
+        const opposition = generateOpposition(loadTemplateData(), sentryDataObj);
         TBT.Utils.setVariable(TBT.Utils.VARS.opp.generatedData, JSON.stringify(opposition));
     });
 
@@ -200,7 +218,12 @@
             generatedData = JSON.parse(generatedData);
             $dataEnemies = TBT.Utils.normalizeGameDataArray(generatedData.enemies);
             $dataTroops = TBT.Utils.normalizeGameDataArray(generatedData.troops);
-            TBT.Utils.setVariable(TBT.Utils.VARS.opp.troopCount, $dataTroops.length);
         }
+    });
+
+    PluginManager.registerCommand(pluginName, "setNextTroop", () => {
+        const troopSchedule = JSON.parse(TBT.Utils.getVariable(TBT.Utils.VARS.col.troopSchedule));
+        const winCount = TBT.Utils.getVariable(TBT.Utils.VARS.col.winCount);
+        TBT.Utils.setVariable(TBT.Utils.VARS.col.nextTroop, troopSchedule[winCount]);
     });
 })();
