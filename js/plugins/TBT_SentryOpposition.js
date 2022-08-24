@@ -93,6 +93,16 @@
     // ------------------------------------------------------------------------
     // Opposition Game Logic
 
+    const isFrontendIssue = (issue) => issue.platform === 'javascript';
+
+    const FRONTEND_TYPE = 10;
+    const BACKEND_TYPE = 11;
+    const generateTypeModifier = (typeId, modifier) => ({
+        code: 11,
+        dataId: typeId,
+        value: modifier,
+    });
+
     const mapSentryDataToEnemy = (enemy, troop, issue) => {
         const shortId = issue.shortId;
         const title = issue.title;
@@ -106,6 +116,18 @@
 
         // set enemy name
         enemy.name = shortId ? shortId : title.split(": ")[0];
+        // set enemy type
+        if (isFrontendIssue(issue)) {
+            // weakness to frontend attacks
+            enemy.traits.push(generateTypeModifier(FRONTEND_TYPE, 2));
+            // resistant to backend attacks
+            enemy.traits.push(generateTypeModifier(BACKEND_TYPE, 0.5));
+        } else {
+            // weakness to backend attacks
+            enemy.traits.push(generateTypeModifier(BACKEND_TYPE, 2));
+            // resistant to frontend attacks
+            enemy.traits.push(generateTypeModifier(FRONTEND_TYPE, 0.5));
+        }
         // set troop dialogue
         troop.pages[0].list.unshift(
             {
