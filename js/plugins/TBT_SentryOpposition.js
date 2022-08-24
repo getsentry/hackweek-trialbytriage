@@ -107,6 +107,8 @@
         // set enemy name
         enemy.name = shortId ? shortId : title.split(": ")[0];
         // set troop dialogue
+        troop.pages[0].conditions.turnValid = true;
+        troop.pages[0].conditions.turnA = 0;
         troop.pages[0].list.unshift(
             {
                 "code": 101,
