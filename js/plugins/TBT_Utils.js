@@ -44,7 +44,17 @@ TBT.Utils = TBT.Utils || {};
         opp: {
             templateData: 21,
             generatedData: 22,
-            troopCount: 23,
+        },
+
+        /*
+         * COL: Variables related to the loop of battles spawned by talking to
+         * the Battlemaster in the Colosseum
+         */
+        col: {
+            winCount: 41,
+            nextTroop: 42,
+            maxWins: 43,
+            troopSchedule: 44,
         },
     };
 
