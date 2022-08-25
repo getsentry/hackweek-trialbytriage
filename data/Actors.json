@@ -1,7 +1,7 @@
 [
 null,
-{"id":1,"battlerName":"TBT_Architect","characterIndex":0,"characterName":"TBT_Architect","classId":1,"equips":[2,27,0,3,0],"faceIndex":0,"faceName":"TBT_Architect","traits":[],"initialLevel":1,"maxLevel":99,"name":"Cora","nickname":"","note":"","profile":""},
-{"id":2,"battlerName":"TBT_Engineer","characterIndex":0,"characterName":"TBT_Engineer","classId":2,"equips":[2,27,65,3,0],"faceIndex":0,"faceName":"TBT_Engineer","traits":[],"initialLevel":1,"maxLevel":99,"name":"Felix","nickname":"","note":"","profile":""},
-{"id":3,"battlerName":"TBT_QualityAssurance","characterIndex":0,"characterName":"TBT_QualityAssurance","classId":3,"equips":[7,0,0,20,0],"faceIndex":0,"faceName":"TBT_QualityAssurance","traits":[],"initialLevel":1,"maxLevel":99,"name":"Sylvia","nickname":"","note":"","profile":""},
-{"id":4,"battlerName":"TBT_ProductOwner","characterIndex":0,"characterName":"TBT_ProductOwner","classId":4,"equips":[7,0,0,20,0],"faceIndex":0,"faceName":"TBT_ProductOwner","traits":[],"initialLevel":1,"maxLevel":99,"name":"Zane","nickname":"","note":"","profile":""}
+{"id":1,"battlerName":"TBT_Architect","characterIndex":0,"characterName":"TBT_Architect","classId":1,"equips":[0,0,0,0,0],"faceIndex":0,"faceName":"TBT_Architect","traits":[],"initialLevel":1,"maxLevel":99,"name":"Cora","nickname":"","note":"","profile":""},
+{"id":2,"battlerName":"TBT_Engineer","characterIndex":0,"characterName":"TBT_Engineer","classId":2,"equips":[0,0,65,0,0],"faceIndex":0,"faceName":"TBT_Engineer","traits":[],"initialLevel":1,"maxLevel":99,"name":"Felix","nickname":"","note":"","profile":""},
+{"id":3,"battlerName":"TBT_QualityAssurance","characterIndex":0,"characterName":"TBT_QualityAssurance","classId":3,"equips":[7,0,0,0,0],"faceIndex":0,"faceName":"TBT_QualityAssurance","traits":[],"initialLevel":1,"maxLevel":99,"name":"Sylvia","nickname":"","note":"","profile":""},
+{"id":4,"battlerName":"TBT_ProductOwner","characterIndex":0,"characterName":"TBT_ProductOwner","classId":4,"equips":[7,0,0,0,0],"faceIndex":0,"faceName":"TBT_ProductOwner","traits":[],"initialLevel":1,"maxLevel":99,"name":"Zane","nickname":"","note":"","profile":""}
 ]
