@@ -59,7 +59,7 @@
   },
   "currencyUnit": "Bits",
   "defeatMe": { "name": "Defeat1", "pan": 0, "pitch": 100, "volume": 90 },
-  "editMapId": 3,
+  "editMapId": 1,
   "elements": [
     "",
     "Physical",
