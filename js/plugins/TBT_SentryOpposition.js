@@ -118,6 +118,9 @@
             errorCount += issueStats[i][1];
         }
 
+        // https://stackoverflow.com/a/11675520/2160657
+        const title_wrapped = (title + ' ').replace(/(\S(.{0,45}\S)?)\s+/g, '$1\n').trim()
+
         // set enemy name
         enemy.name = shortId ? shortId : title.split(": ")[0];
         // set enemy type
@@ -151,7 +154,7 @@
                 "code": 401,
                 "indent": 0,
                 parameters: [
-                    title, // text dialogue
+                    title_wrapped, // text dialogue
                 ]
             }
         );
