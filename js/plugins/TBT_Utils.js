@@ -1,7 +1,7 @@
 /*:
  * @target MZ
  * @plugindesc Utilities for Trial by Triage
-*/
+ */
 
 var TBT = TBT || {};
 TBT.Utils = TBT.Utils || {};
@@ -55,6 +55,13 @@ TBT.Utils = TBT.Utils || {};
             nextTroop: 42,
             maxWins: 43,
             troopSchedule: 44,
+        },
+
+        // CUR: Variables related to the currency system
+        cur: {
+            currencyState: 81,
+            ephemeralBalance: 82,
+            permanentBalance: 83,
         },
     };
 
