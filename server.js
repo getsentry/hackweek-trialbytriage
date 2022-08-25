@@ -76,11 +76,12 @@ var serve = function (serverRequest, serverResponse) {
     }
     function makeProxyRequest(spec) {
         return __awaiter(this, void 0, void 0, function () {
-            var method, proxyRequest;
+            var method, isProtocolHttp, proxyRequest;
             return __generator(this, function (_a) {
                 method = spec.method || 'GET';
                 console.log("Proxy: " + method + " " + spec.address);
-                proxyRequest = https.request(spec.address, {
+                isProtocolHttp = spec.address.startsWith("http:");
+                proxyRequest = (isProtocolHttp ? http : https).request(spec.address, {
                     method: method,
                     headers: spec.headers
                 }, (function (proxyResponse) {
@@ -144,6 +145,7 @@ function launchBrowser(url) {
     child_process.exec(command + ' ' + url);
 }
 var port = 5000;
+console.log("Starting server on port " + port);
 var server = http.createServer(serve);
 server.listen(port);
 // launchBrowser("http://localhost:" + port);

@@ -49,7 +49,10 @@ const serve = (serverRequest: http.IncomingMessage, serverResponse: http.ServerR
     async function makeProxyRequest(spec: ProxyRequestSpec) {
         const method = spec.method || 'GET';
         console.log("Proxy: " + method + " " + spec.address);
-        const proxyRequest = https.request(
+
+        const isProtocolHttp: boolean = spec.address.startsWith("http:");
+
+        const proxyRequest = (isProtocolHttp ? http : https).request(
             spec.address,
             {
                 method: method,
@@ -115,6 +118,7 @@ function launchBrowser(url: string) {
 }
 
 const port = 5000;
+console.log("Starting server on port " + port);
 const server: http.Server = http.createServer(serve);
 server.listen(port);
 // launchBrowser("http://localhost:" + port);
