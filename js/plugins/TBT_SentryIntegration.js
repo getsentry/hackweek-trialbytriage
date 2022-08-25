@@ -169,6 +169,44 @@ TBT.SentryIntegration = TBT.SentryIntegration || {};
         PluginManager.callCommand(this, pluginName, "open_menu");
     };
 
+    // ------------------------------------------------------------------------
+    // Remote request
+
+    const QUERY_PARAMETERS = {
+        expand: ["stats", "owners", "inbox"],
+        limit: [30],
+        query: ["is%3Aunresolved"],
+        shortIdLookup: [1],
+        statsPeriod: ["14d"],
+    };
+
+    const buildQueryString = (parameters) =>
+        Object.entries(parameters)
+            .map(([name, values]) => values
+                ? values.map(value => name + "=" + value).join("&")
+                : name)
+            .join("&");
+
+    const executeQuery = (server, authToken, orgSlug) => {
+        // TODO: Let the player customize the parameters on this query?
+        const address = server + "api/0/organizations/" + orgSlug + "/issues/?"
+            + buildQueryString(QUERY_PARAMETERS);
+        console.log(address);
+
+        return fetch(new Request(
+            "proxy",
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    method: 'GET',
+                    address: address,
+                    headers: {
+                        Authorization: "Bearer " + authToken,
+                    },
+                }),
+            }
+        ));
+    };
 
     // ------------------------------------------------------------------------
     // Commands
@@ -185,40 +223,23 @@ TBT.SentryIntegration = TBT.SentryIntegration || {};
             TBT.Utils.setVariable(TBT.Utils.VARS.sen.downloadStatus, 2);
         }
 
-        // TODO: Let the player customize the parameters on this query?
-        const address = server + "api/0/organizations/" + orgSlug
-            + "/issues/"
-            + "?expand=owners&expand=inbox&limit=2"
-            + "&query=is%3Aunresolved&shortIdLookup=1&statsPeriod=1h";
-
-        fetch(new Request(
-            "proxy",
-            {
-                method: 'POST',
-                body: JSON.stringify({
-                    method: 'GET',
-                    address: address,
-                    headers: {
-                        Authorization: "Bearer " + authToken,
-                    },
-                }),
-            }
-        )).catch((error) => {
-            console.log("Oops: " + error);
-            TBT.Utils.setVariable(TBT.Utils.VARS.sen.downloadStatus, 2);
-            throw error;
-        }).then((response) => {
-            if (response.status !== 200) {
-                const downloadStatus = (response.status === 401) ? 4
-                    : (response.status === 404) ? 5 : 3;
-                TBT.Utils.setVariable(TBT.Utils.VARS.sen.downloadStatus, downloadStatus);
-                throw response.status;
-            }
-            return response.text();
-        }).then((text) => {
-            TBT.Utils.setVariable(TBT.Utils.VARS.sen.downloadStatus, 1);
-            TBT.Utils.setVariable(TBT.Utils.VARS.sen.downloadedData, text);
-        }).catch((error) => { });
+        executeQuery(server, authToken, orgSlug)
+            .catch((error) => {
+                console.log("Oops: " + error);
+                TBT.Utils.setVariable(TBT.Utils.VARS.sen.downloadStatus, 2);
+                throw error;
+            }).then((response) => {
+                if (response.status !== 200) {
+                    const downloadStatus = (response.status === 401) ? 4
+                        : (response.status === 404) ? 5 : 3;
+                    TBT.Utils.setVariable(TBT.Utils.VARS.sen.downloadStatus, downloadStatus);
+                    throw response.status;
+                }
+                return response.text();
+            }).then((text) => {
+                TBT.Utils.setVariable(TBT.Utils.VARS.sen.downloadStatus, 1);
+                TBT.Utils.setVariable(TBT.Utils.VARS.sen.downloadedData, text);
+            }).catch((error) => { });;
     });
 
     TBT.SentryIntegration.isReadyToConnect = () => {
