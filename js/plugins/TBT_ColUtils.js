@@ -9,6 +9,9 @@
  * @desc Removes any ephemereal growth gains from stats
 */
 
+var TBT = TBT || {};
+TBT.ColUtils = TBT.ColUtils || {};
+
 (() => {
     "use strict";
 
@@ -23,4 +26,10 @@
             actor._paramPlus = [0, 0, 0, 0, 0, 0, 0, 0];
         }
     });
+
+    TBT.ColUtils.calculateRunReward = () => {
+        const winCount = TBT.Utils.getVariable(TBT.Utils.VARS.col.winCount);
+        return (winCount <= 0) ? 0
+            : Math.round(100 * (winCount + 0.1 * Math.pow(winCount - 1, 2)));
+    };
 })();
