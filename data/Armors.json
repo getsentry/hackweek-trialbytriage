@@ -1,9 +1,9 @@
 [
 null,
 {"id":1,"atypeId":1,"description":"","etypeId":4,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":135,"name":"-----Armors","note":"","params":[0,0,0,1,0,0,0,0],"price":100},
-{"id":2,"atypeId":1,"description":"[General Equipment] Linen clothing with high\nbreathability.","etypeId":4,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":135,"name":"Linen Clothing","note":"","params":[0,0,0,1,0,0,0,0],"price":100},
-{"id":3,"atypeId":1,"description":"[General Equipment] A vest made of tanned hide.","etypeId":4,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":135,"name":"Leather Vest","note":"","params":[0,0,0,3,0,0,0,0],"price":200},
-{"id":4,"atypeId":1,"description":"[General Equipment] Durable clothing that can\nwithstand rough travels.","etypeId":4,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":135,"name":"Adventurer’s Clothing","note":"","params":[0,0,0,7,0,0,0,0],"price":550},
+{"id":2,"atypeId":1,"description":"Useful for basic protection against issue monsters.","etypeId":4,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":135,"name":"Vest of Issue Alerting","note":"","params":[0,0,0,2,0,0,0,0],"price":100},
+{"id":3,"atypeId":1,"description":"Chainmail strong enough to protect its wearer against\nlarge volumes of issues.","etypeId":4,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":135,"name":"Chainmail of Metric Alerting","note":"","params":[0,0,0,5,0,0,0,0],"price":200},
+{"id":4,"atypeId":1,"description":"Durable and heavy. Should help protect against even the\nheaviest blows from issue creatures.","etypeId":4,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":135,"name":"Performance Issue Platemail","note":"","params":[0,0,0,10,0,0,0,0],"price":600},
 {"id":5,"atypeId":1,"description":"[General Equipment] A vest made of leather\nhardened with glue.","etypeId":4,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":135,"name":"Hard Leather","note":"","params":[0,0,0,15,0,0,0,0],"price":980},
 {"id":6,"atypeId":1,"description":"[General Equipment] Tanned hide clothing reinforced\nwith steel plates.","etypeId":4,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":135,"name":"Brigandine","note":"","params":[0,0,0,20,0,0,0,0],"price":1560},
 {"id":7,"atypeId":0,"description":"","etypeId":2,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":0,"name":"","note":"","params":[0,0,0,0,0,0,0,0],"price":0},
