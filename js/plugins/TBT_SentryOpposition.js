@@ -107,6 +107,14 @@
         value: modifier,
     });
 
+    const COLOSSEUM_TIERS = [
+        [1, 2, 3, 4, 5, 6],
+        [7, 8, 9, 10, 11, 12],
+        [13, 14, 15, 16, 17, 18],
+        [19, 20, 21, 22, 23, 24],
+        [25, 26, 27, 28, 29, 30],
+    ];
+
     const mapSentryDataToEnemy = (enemy, troop, issue) => {
         const shortId = issue.shortId;
         const title = issue.title;
@@ -122,7 +130,8 @@
         const title_wrapped = (title + ' ').replace(/(\S(.{0,45}\S)?)\s+/g, '$1\n').trim()
 
         // set enemy name
-        enemy.name = shortId ? shortId : title.split(": ")[0];
+        const enemyName = shortId ? shortId : title.split(": ")[0];
+        enemy.name = enemyName;
         // set enemy type
         if (isFrontendIssue(issue)) {
             // weakness to frontend attacks
@@ -135,6 +144,16 @@
             // resistant to frontend attacks
             enemy.traits.push(generateTypeModifier(FRONTEND_TYPE, 0.5));
         }
+        // set enemy gold/xp
+        const enemyInTroop = troop.members[0];
+        if (enemyInTroop) {
+            const tier = COLOSSEUM_TIERS.findIndex(colTier => colTier.includes(enemyInTroop.enemyId));
+            if (tier >= 0) {
+                enemy.gold = (tier + 1) * 12;
+                enemy.xp = (tier + 1) * 8;
+            }
+        }
+
         // set troop dialogue
         troop.pages[0].conditions.turnValid = true;
         troop.pages[0].conditions.turnA = 0;
@@ -147,7 +166,7 @@
                     0,
                     0,
                     2,
-                    level // text title
+                    enemyName // text title
                 ]
             },
             {
@@ -160,14 +179,6 @@
         );
         return [enemy, troop];
     }
-
-    const COLOSSEUM_TIERS = [
-        [1, 2, 3, 4, 5, 6],
-        [7, 8, 9, 10, 11, 12],
-        [13, 14, 15, 16, 17, 18],
-        [19, 20, 21, 22, 23, 24],
-        [25, 26, 27, 28, 29, 30],
-    ];
 
     const setColosseumSchedule = () => {
         let schedule = [];
