@@ -30,6 +30,6 @@ TBT.ColUtils = TBT.ColUtils || {};
     TBT.ColUtils.calculateRunReward = () => {
         const winCount = TBT.Utils.getVariable(TBT.Utils.VARS.col.winCount);
         return (winCount <= 0) ? 0
-            : Math.round(100 * (winCount + 0.1 * Math.pow(winCount - 1, 2)));
+            : Math.round(10 * (winCount + 0.1 * Math.pow(winCount - 1, 2)));
     };
 })();
