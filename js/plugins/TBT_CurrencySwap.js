@@ -36,6 +36,11 @@
         return STATES.filter(s => s.value == stateNumber)[0];
     };
 
+    const setCurrencyUnitNameInSystem = () => {
+        const state = getState(TBT.Utils.getVariable(TBT.Utils.VARS.cur.currencyState));
+        $dataSystem.currencyUnit = state.unitName;
+    };
+
     PluginManager.registerCommand(pluginName, "swap", (args) => {
         const previousState = getState(TBT.Utils.getVariable(TBT.Utils.VARS.cur.currencyState));
         const oldBalance = $gameParty.gold();
@@ -46,7 +51,8 @@
         const newBalance = TBT.Utils.getVariable(newState.balanceVar);
         $gameParty.gainGold(newBalance - oldBalance);
 
-        $dataSystem.currencyUnit = newState.unitName;
+        setCurrencyUnitNameInSystem();
     });
 
+    TBT.Utils.registerGameLoadAction(setCurrencyUnitNameInSystem);
 })();

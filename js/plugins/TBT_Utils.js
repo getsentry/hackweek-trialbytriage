@@ -127,4 +127,21 @@ TBT.Utils = TBT.Utils || {};
         return normalArray;
     };
 
+    // ------------------------------------------------------------------------
+    // Loading Hooks
+
+    TBT.Utils.GAME_LOAD_ACTIONS = []
+
+    TBT.Utils.registerGameLoadAction = (callback) => {
+        TBT.Utils.GAME_LOAD_ACTIONS.push(callback);
+    };
+
+    const _DataManager__extractSaveContents = DataManager.extractSaveContents;
+    DataManager.extractSaveContents = function (contents) {
+        _DataManager__extractSaveContents(contents);
+        for (const action of TBT.Utils.GAME_LOAD_ACTIONS) {
+            action();
+        }
+    };
+
 })();
