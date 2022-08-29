@@ -35,6 +35,7 @@ TBT.Utils = TBT.Utils || {};
             authToken: 4,
             orgSlug: 5,
             userEmail: 6,
+            downloadTimestamp: 7,
         },
 
         /*

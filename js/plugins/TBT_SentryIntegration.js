@@ -23,6 +23,13 @@ TBT.SentryIntegration = TBT.SentryIntegration || {};
 
     const pluginName = "TBT_SentryIntegration";
 
+    const TIME_UNITS = [
+        { size: 60, singular: "second", plural: "seconds" },
+        { size: 60, singular: "minute", plural: "minutes" },
+        { size: 24, singular: "hour", plural: "hours" },
+        { size: null, singular: "day", plural: "days" },
+    ]
+
     // ------------------------------------------------------------------------
     // Configuration menu for connecting to remote Sentry API
 
@@ -239,8 +246,12 @@ TBT.SentryIntegration = TBT.SentryIntegration || {};
             }).then((text) => {
                 TBT.Utils.setVariable(TBT.Utils.VARS.sen.downloadStatus, 1);
                 TBT.Utils.setVariable(TBT.Utils.VARS.sen.downloadedData, text);
+                TBT.Utils.setVariable(TBT.Utils.VARS.sen.downloadTimestamp, new Date().getTime());
             }).catch((error) => { });;
     });
+
+    // ------------------------------------------------------------------------
+    // Exported functions
 
     TBT.SentryIntegration.isReadyToConnect = () => {
         return TBT.Utils.getVariable(TBT.Utils.VARS.sen.serverAddress)
@@ -251,4 +262,34 @@ TBT.SentryIntegration = TBT.SentryIntegration || {};
     TBT.SentryIntegration.isDataDownloaded = () => {
         return TBT.Utils.getVariable(TBT.Utils.VARS.sen.downloadedData);
     };
+
+    TBT.SentryIntegration.getTimeSinceLastDownload = () => {
+        const timestamp = TBT.Utils.getVariable(TBT.Utils.VARS.sen.downloadTimestamp);
+        console.log("timestamp=" + timestamp);
+        if (!timestamp) return 0;
+
+        let interval = Math.round((new Date().getTime() - timestamp) / 1000);
+
+        let words = [];
+        for (const unit of TIME_UNITS) {
+            if (interval <= 0) break;
+            let magnitude;
+            if (unit.size) {
+                magnitude = interval % unit.size;
+                interval = Math.floor(interval / unit.size);
+            }
+            else {
+                magnitude = interval;
+            }
+            words.unshift(magnitude + " " + (magnitude === 1 ? unit.singular : unit.plural));
+            console.log("words=" + JSON.stringify(words));
+        }
+
+        while (words.length > 2) {
+            words.pop();
+        }
+
+        console.log("words=" + JSON.stringify(words));
+        return words.join(" and ");
+    }
 })();
