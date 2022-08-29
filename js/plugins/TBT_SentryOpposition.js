@@ -66,6 +66,18 @@
         }
     };
 
+    /**
+     * Randomly reorder the elements of an array.
+     *
+     * @param {Object[]} array the array to shuffle (not modified)
+     * @returns a shuffled copy of the array
+     */
+    const shuffleArray = (array) => {
+        const copy = [...array];
+        shuffleArraySegments([copy], 0, copy.length);
+        return copy;
+    };
+
     // ------------------------------------------------------------------------
     // Template Data I/O
 
@@ -172,8 +184,7 @@
     const setColosseumSchedule = () => {
         let schedule = [];
         for (let tier of COLOSSEUM_TIERS) {
-            tier = [...tier];
-            shuffleArraySegments([tier], 0, tier.length);
+            tier = shuffleArray(tier);
             schedule = schedule.concat(tier);
         }
 
@@ -187,7 +198,7 @@
         const enemies = [...templateData.enemies];
         const troops = [...templateData.troops];
 
-        shuffleArraySegments([sentryData], 0, sentryData.length);
+        sentryData = shuffleArray(sentryData);
         const colosseumSchedule = setColosseumSchedule();
 
         for (let i = 0; i < Math.min(colosseumSchedule.length, sentryData.length); i++) {
