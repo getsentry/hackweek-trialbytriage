@@ -1,6 +1,6 @@
 /*:
  * @target MZ
- * @plugindesc Utilities for managing the colosseum gameplay loop of Trial by Triage
+ * @plugindesc Utilities for managing the colosseum gameplay loop
  * 
  * @help
  * 
@@ -15,7 +15,7 @@ TBT.ColUtils = TBT.ColUtils || {};
 (() => {
     "use strict";
 
-    const pluginName = "TBT_ColUtils";
+    const pluginName = "TBT_Colosseum";
 
     PluginManager.registerCommand(pluginName, "reset_party", () => {
         for (const actor of $gameActors._data) {

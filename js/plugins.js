@@ -7,5 +7,5 @@ var $plugins =
 {"name":"TBT_SentryIntegration","status":true,"description":"Connect to a remote Sentry API","parameters":{}},
 {"name":"TBT_SentryOpposition","status":true,"description":"Create custom enemies from Sentry data","parameters":{}},
 {"name":"TBT_CurrencySwap","status":true,"description":"Swap between ephemeral and permanent currency","parameters":{}},
-{"name":"TBT_ColUtils","status":true,"description":"Utilities for managing the colosseum gameplay loop of Trial by Triage","parameters":{}}
+{"name":"TBT_Colosseum","status":true,"description":"Utilities for managing the colosseum gameplay loop","parameters":{}}
 ];
