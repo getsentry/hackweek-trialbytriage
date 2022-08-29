@@ -7,5 +7,5 @@ null,
 {"id":5,"expanded":false,"name":"Volcano","order":5,"parentId":0,"scrollX":1131,"scrollY":949.5},
 {"id":6,"expanded":false,"name":"Office 1F","order":8,"parentId":0,"scrollX":1131,"scrollY":633.5},
 {"id":7,"expanded":false,"name":"Antechamber","order":2,"parentId":1,"scrollX":571,"scrollY":337.5},
-{"id":8,"expanded":false,"name":"Armory","order":3,"parentId":1,"scrollX":0,"scrollY":0}
+{"id":8,"expanded":false,"name":"Armory","order":3,"parentId":1,"scrollX":1131,"scrollY":641.5}
 ]
