@@ -11,7 +11,11 @@ Inc., and incorporates assets that are **©Gotcha Gotcha Games Inc./YOJI OJIMA
 2020**. Their use and distribution are governed by the [RPG Maker MZ User
 License Agreement][eula].
 
+All content produced by Sentry for this project is available under the [MIT
+License][mit], as specified in individual source files.
+
   [eula]: https://www.rpgmakerweb.com/eula
+  [mit]: https://opensource.org/licenses/MIT
 
 ## How to Play
 
