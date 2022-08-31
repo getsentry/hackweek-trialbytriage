@@ -4,6 +4,15 @@ _Trial by Triage_ is a fun accessory to the Sentry platform that was made as a
 Hackweek project in 2022. It is a JRPG-styled video game where the enemies are
 based on issues from the player's Sentry feed.
 
+## Licensing
+
+This game was produced using _RPG Maker MZ_, a product of Gotcha Gotcha Games
+Inc., and incorporates assets that are **©Gotcha Gotcha Games Inc./YOJI OJIMA
+2020**. Their use and distribution are governed by the [RPG Maker MZ User
+License Agreement][eula].
+
+  [eula]: https://www.rpgmakerweb.com/eula
+
 ## How to Play
 
 The game is hosted at https://tbt.sentry.gg/ and can be played locally.
@@ -37,10 +46,6 @@ device, especially with local disk encryption.
 
 To reduce risk, use an API key with no permission scopes other than
 `event:read`.
-
-## Technical Background
-
-_Trial by Triage_ was made with _RPG Maker MZ_.
 
 ## Project Pages
 
